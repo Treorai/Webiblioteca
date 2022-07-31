@@ -1,13 +1,21 @@
 package gui;
 
+import classes.pushArray;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class ClientGUI extends javax.swing.JFrame {
 
     public ClientGUI(List<Map<String,String>> json) {
-        myInitComponents(json);
+        String[] lista = new String[json.size()];
+        for(int i = 0; i < json.size(); i++){
+            lista[i] = json.get(i).get("display");
+        }
+        
+        beforeInitComponents(json, lista);
         initComponents();
+        laterInitComponents(json, lista);
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -47,8 +55,8 @@ public class ClientGUI extends javax.swing.JFrame {
         jtxa_obs = new javax.swing.JTextArea();
         jl_displayOutdoor = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtx_searchbox = new javax.swing.JTextField();
+        jb_search = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         jMenuItem_Sair = new javax.swing.JMenuItem();
@@ -202,12 +210,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/pesquisar.png"))); // NOI18N
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jb_search.setText("Buscar");
 
         jMenu_Arquivo.setText("Arquivo");
 
@@ -231,9 +234,9 @@ public class ClientGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(jtx_searchbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jb_search))
                     .addComponent(jScrollPane_Titles, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_Info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,8 +249,8 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)))
+                        .addComponent(jtx_searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_search)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel_Info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,33 +264,28 @@ public class ClientGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void list_titlesMouseClicked(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
     }
+    
+    private void jb_searchActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
+        findBook(json, lista);
+    }
+    
     
     private void list_titlesKeyReleased(java.awt.event.KeyEvent evt, List<Map<String,String>> json, String[] lista){
         try{
             openBook(json, lista);
         }catch(Exception e){
-            //do not crash if cannot select anything
+            //do not crash if cannot find something to select
         }
     }
 
     
 
-    //custom InitComponents to avoid messing the IDE locked code
-    private void myInitComponents(List<Map<String,String>> json){
+    //custom InitComponents outside the ide auto generated code that must happen before initComponents()
+    private void beforeInitComponents(List<Map<String,String>> json, String[] lista){
         list_titles = new javax.swing.JList<>();
-        
-        String[] lista = new String[json.size()];
-        for(int i = 0; i < json.size(); i++){
-            lista[i] = json.get(i).get("display");
-        }
-            
         list_titles.setModel(new javax.swing.AbstractListModel<String>() {
             public int getSize() { return lista.length; }
             public String getElementAt(int i) { return lista[i]; }
@@ -305,6 +303,16 @@ public class ClientGUI extends javax.swing.JFrame {
         });
         
     }
+    
+    //custom InitComponents outside the ide auto generated code that must happen fater initComponents()
+    private void laterInitComponents(List<Map<String,String>> json, String[] lista){
+        jb_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_searchActionPerformed(evt, json, lista);
+            }
+        });
+    }
+    
     /**
      * @param json
      */
@@ -342,8 +350,6 @@ public class ClientGUI extends javax.swing.JFrame {
             }
         });
         
-        //run fisrt main ********************************************************************
-        
     }
     
     //Print the book info on the pannel
@@ -357,9 +363,28 @@ public class ClientGUI extends javax.swing.JFrame {
                 break;
             }
         }
-        
         //Load full Object
         printBook(tempObj);
+        
+    }
+    
+    public void findBook(List<Map<String,String>> json, String[] lista){
+        String[] listaSearch = new String[0];
+        //find matches
+        for(int i = 0; i < json.size(); i++){
+            if(json.get(i).get("display").contains(jtx_searchbox.getText())){
+                listaSearch = pushArray.push(listaSearch, json.get(i).get("display"));
+            }
+        }
+        //listaSearch must be final
+        final var finalSearch = listaSearch;
+        //print matches
+        list_titles.setModel(new javax.swing.AbstractListModel<String>() {
+            @Override
+            public int getSize() { return finalSearch.length; }
+            @Override
+            public String getElementAt(int i) { return finalSearch[i]; }
+        });
         
     }
     
@@ -375,11 +400,9 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_type.setText(tempObj.get("type"));
         jtx_located.setText(tempObj.get("located"));
         jtxa_obs.setText(tempObj.get("obs"));
-        //TODO: jbutton_delete.setEnabled(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton jButton1;
     javax.swing.JLabel jLabel1;
     javax.swing.JMenuBar jMenuBar1;
     javax.swing.JMenuItem jMenuItem_Sair;
@@ -389,7 +412,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JPopupMenu jPopupMenu1;
     javax.swing.JScrollPane jScrollPane_Titles;
     javax.swing.JScrollPane jScrollPane_obs;
-    javax.swing.JTextField jTextField1;
+    javax.swing.JButton jb_search;
     javax.swing.JLabel jl_author;
     javax.swing.JLabel jl_displayOutdoor;
     javax.swing.JLabel jl_edition;
@@ -406,6 +429,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JTextField jtx_genre;
     javax.swing.JTextField jtx_lang;
     javax.swing.JTextField jtx_located;
+    javax.swing.JTextField jtx_searchbox;
     javax.swing.JTextField jtx_sub;
     javax.swing.JTextField jtx_title;
     javax.swing.JTextField jtx_type;
