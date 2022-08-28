@@ -10,22 +10,56 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu_Arquivo">
+        <Menu class="javax.swing.JMenu" name="jm_file">
           <Properties>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_Sair">
+            <MenuItem class="javax.swing.JMenuItem" name="jm_file_new">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Novo"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_file_edit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_file_delete">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_file_exit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_file_exitActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu_Ajuda">
+        <Menu class="javax.swing.JMenu" name="jm_options">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jm_help">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajuda"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_help_about">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sobre"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
@@ -118,7 +152,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -132,16 +166,19 @@
                               <Component id="jScrollPane_obs" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jl_genre" min="-2" max="-2" attributes="0"/>
                                       <Component id="jl_sub" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jl_genre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jl_type" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jtx_located" alignment="0" pref="347" max="32767" attributes="0"/>
-                                              <Component id="jtx_genre" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jtx_type" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jtx_located" min="-2" pref="310" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jtx_type" alignment="0" min="-2" pref="310" max="-2" attributes="0"/>
+                                                  <Component id="jtx_genre" alignment="1" min="-2" pref="310" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -151,7 +188,7 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jtx_vol" alignment="0" pref="187" max="32767" attributes="0"/>
+                                              <Component id="jtx_vol" alignment="0" pref="186" max="32767" attributes="0"/>
                                               <Component id="jtx_edition" max="32767" attributes="0"/>
                                               <Component id="jtx_lang" alignment="0" max="32767" attributes="0"/>
                                           </Group>
@@ -159,19 +196,16 @@
                                       <Component id="jtx_sub" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jl_type" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jl_author" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jl_title" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jl_displayOutdoor" pref="578" max="32767" attributes="0"/>
-                                          <Component id="jtx_author" pref="578" max="32767" attributes="0"/>
-                                          <Component id="jtx_title" max="32767" attributes="0"/>
-                                      </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jl_title" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jl_author" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtx_title" alignment="0" pref="571" max="32767" attributes="0"/>
+                                      <Component id="jtx_author" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jl_displayOutdoor" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -237,7 +271,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Autor"/>
+            <Property name="text" type="java.lang.String" value="Autor:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_author">
@@ -253,7 +287,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
+            <Property name="text" type="java.lang.String" value="T&#xed;tulo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_title">
@@ -266,7 +300,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_sub">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Subt&#xed;tulo"/>
+            <Property name="text" type="java.lang.String" value="Subt&#xed;tulo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_sub">
@@ -276,7 +310,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_genre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="G&#xea;nero"/>
+            <Property name="text" type="java.lang.String" value="G&#xea;nero:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_genre">
@@ -286,7 +320,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_vol">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Volume"/>
+            <Property name="text" type="java.lang.String" value="Volume:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_vol">
@@ -296,7 +330,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_type">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tipo"/>
+            <Property name="text" type="java.lang.String" value="Tipo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_type">
@@ -306,7 +340,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_edition">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edi&#xe7;&#xe3;o"/>
+            <Property name="text" type="java.lang.String" value="Edi&#xe7;&#xe3;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_edition">
@@ -316,7 +350,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_located">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Local"/>
+            <Property name="text" type="java.lang.String" value="Local:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_located">
@@ -326,7 +360,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_lang">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Idioma"/>
+            <Property name="text" type="java.lang.String" value="Idioma:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_lang">

@@ -6,6 +6,7 @@ import gui.ClientGUI;
 public class WebibliotecaApp {
     
     public static void main(String[] args) {
+        String version = "1.0.0";
 
         //load the local file
         var jsonfile = new JsonLoader();

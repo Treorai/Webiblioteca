@@ -1,11 +1,13 @@
 package gui;
 
 import classes.pushArray;
-import java.util.Arrays;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.util.List;
 import java.util.Map;
 
 public class ClientGUI extends javax.swing.JFrame {
+    
+    //private NewBookGUI nbgui;
 
     public ClientGUI(List<Map<String,String>> json) {
         String[] lista = new String[json.size()];
@@ -58,9 +60,15 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_searchbox = new javax.swing.JTextField();
         jb_search = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu_Arquivo = new javax.swing.JMenu();
-        jMenuItem_Sair = new javax.swing.JMenuItem();
-        jMenu_Ajuda = new javax.swing.JMenu();
+        jm_file = new javax.swing.JMenu();
+        jm_file_new = new javax.swing.JMenuItem();
+        jm_file_edit = new javax.swing.JMenuItem();
+        jm_file_delete = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jm_file_exit = new javax.swing.JMenuItem();
+        jm_options = new javax.swing.JMenu();
+        jm_help = new javax.swing.JMenu();
+        jm_help_about = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Webiblioteca");
@@ -68,46 +76,46 @@ public class ClientGUI extends javax.swing.JFrame {
         jPanel_Info.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jl_author.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jl_author.setText("Autor");
+        jl_author.setText("Autor:");
 
         jtx_author.setEditable(false);
         jtx_author.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         jl_title.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jl_title.setText("TÃ­tulo");
+        jl_title.setText("Título:");
 
         jtx_title.setEditable(false);
         jtx_title.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
-        jl_sub.setText("SubtÃ­tulo");
+        jl_sub.setText("Subtítulo:");
 
         jtx_sub.setEditable(false);
 
-        jl_genre.setText("GÃªnero");
+        jl_genre.setText("Gênero:");
 
         jtx_genre.setEditable(false);
 
-        jl_vol.setText("Volume");
+        jl_vol.setText("Volume:");
 
         jtx_vol.setEditable(false);
 
-        jl_type.setText("Tipo");
+        jl_type.setText("Tipo:");
 
         jtx_type.setEditable(false);
 
-        jl_edition.setText("EdiÃ§Ã£o");
+        jl_edition.setText("Edição:");
 
         jtx_edition.setEditable(false);
 
-        jl_located.setText("Local");
+        jl_located.setText("Local:");
 
         jtx_located.setEditable(false);
 
-        jl_lang.setText("Idioma");
+        jl_lang.setText("Idioma:");
 
         jtx_lang.setEditable(false);
 
-        jl_obs.setText("ObservaÃ§Ãµes");
+        jl_obs.setText("Observações");
 
         jtxa_obs.setEditable(false);
         jtxa_obs.setColumns(20);
@@ -121,7 +129,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jPanel_InfoLayout.setHorizontalGroup(
             jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_InfoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_InfoLayout.createSequentialGroup()
                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,15 +141,17 @@ public class ClientGUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane_obs)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InfoLayout.createSequentialGroup()
                                 .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jl_genre)
                                     .addComponent(jl_sub)
-                                    .addComponent(jl_genre))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jl_type))
+                                .addGap(34, 34, 34)
                                 .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel_InfoLayout.createSequentialGroup()
-                                        .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jtx_located, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                                            .addComponent(jtx_genre, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtx_type, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtx_located, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jtx_type, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jtx_genre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jl_lang)
@@ -149,21 +159,19 @@ public class ClientGUI extends javax.swing.JFrame {
                                             .addComponent(jl_vol))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtx_vol, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                            .addComponent(jtx_vol, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                                             .addComponent(jtx_edition)
                                             .addComponent(jtx_lang)))
                                     .addComponent(jtx_sub)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jl_type)
-                                .addGroup(jPanel_InfoLayout.createSequentialGroup()
-                                    .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jl_author)
-                                        .addComponent(jl_title))
-                                    .addGap(31, 31, 31)
-                                    .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jl_displayOutdoor, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-                                        .addComponent(jtx_author, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-                                        .addComponent(jtx_title)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InfoLayout.createSequentialGroup()
+                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jl_title)
+                                    .addComponent(jl_author))
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtx_title, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                                    .addComponent(jtx_author)
+                                    .addComponent(jl_displayOutdoor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
         );
         jPanel_InfoLayout.setVerticalGroup(
@@ -212,15 +220,39 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jb_search.setText("Buscar");
 
-        jMenu_Arquivo.setText("Arquivo");
+        jm_file.setText("Arquivo");
 
-        jMenuItem_Sair.setText("Sair");
-        jMenu_Arquivo.add(jMenuItem_Sair);
+        jm_file_new.setText("Novo");
+        jm_file.add(jm_file_new);
 
-        jMenuBar1.add(jMenu_Arquivo);
+        jm_file_edit.setText("Editar");
+        jm_file_edit.setEnabled(false);
+        jm_file.add(jm_file_edit);
 
-        jMenu_Ajuda.setText("Ajuda");
-        jMenuBar1.add(jMenu_Ajuda);
+        jm_file_delete.setText("Excluir");
+        jm_file_delete.setEnabled(false);
+        jm_file.add(jm_file_delete);
+        jm_file.add(jSeparator1);
+
+        jm_file_exit.setText("Sair");
+        jm_file_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_file_exitActionPerformed(evt);
+            }
+        });
+        jm_file.add(jm_file_exit);
+
+        jMenuBar1.add(jm_file);
+
+        jm_options.setText("Opções");
+        jMenuBar1.add(jm_options);
+
+        jm_help.setText("Ajuda");
+
+        jm_help_about.setText("Sobre");
+        jm_help.add(jm_help_about);
+
+        jMenuBar1.add(jm_help);
 
         setJMenuBar(jMenuBar1);
 
@@ -264,14 +296,22 @@ public class ClientGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jm_file_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_file_exitActionPerformed
+        // Quit program
+        System.exit(0);
+    }//GEN-LAST:event_jm_file_exitActionPerformed
+
     private void list_titlesMouseClicked(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
+        jm_file_edit.setEnabled(true);
+        jm_file_delete.setEnabled(true);
     }
     
     private void jb_searchActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
         findBook(json, lista);
+        jm_file_edit.setEnabled(false);
+        jm_file_delete.setEnabled(false);
     }
-    
     
     private void list_titlesKeyReleased(java.awt.event.KeyEvent evt, List<Map<String,String>> json, String[] lista){
         try{
@@ -279,9 +319,15 @@ public class ClientGUI extends javax.swing.JFrame {
         }catch(Exception e){
             //do not crash if cannot find something to select
         }
+        jm_file_edit.setEnabled(true);
+        jm_file_delete.setEnabled(true);
+    }
+    
+    private void jm_file_newActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
+        NewBookGUI.main(this, json, lista);
     }
 
-    
+
 
     //custom InitComponents outside the ide auto generated code that must happen before initComponents()
     private void beforeInitComponents(List<Map<String,String>> json, String[] lista){
@@ -304,11 +350,16 @@ public class ClientGUI extends javax.swing.JFrame {
         
     }
     
-    //custom InitComponents outside the ide auto generated code that must happen fater initComponents()
+    //custom InitComponents outside the ide auto generated code that must happen after initComponents()
     private void laterInitComponents(List<Map<String,String>> json, String[] lista){
         jb_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_searchActionPerformed(evt, json, lista);
+            }
+        });
+        jm_file_new.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+            jm_file_newActionPerformed(evt, json, lista);
             }
         });
     }
@@ -318,32 +369,8 @@ public class ClientGUI extends javax.swing.JFrame {
      */
     public static void main(List<Map<String,String>> json) {
         
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        FlatCyanLightIJTheme.setup();
         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ClientGUI(json).setVisible(true);
@@ -358,7 +385,7 @@ public class ClientGUI extends javax.swing.JFrame {
         
         //Find the selected titles obj
         for(int i = 0; i < json.size(); i++){
-            if(list_titles.getSelectedValue() == json.get(i).get("display")){
+            if(list_titles.getSelectedValue().equals(json.get(i).get("display"))){
                 tempObj = json.get(i);
                 break;
             }
@@ -376,6 +403,7 @@ public class ClientGUI extends javax.swing.JFrame {
                 listaSearch = pushArray.push(listaSearch, json.get(i).get("display"));
             }
         }
+        
         //listaSearch must be final
         final var finalSearch = listaSearch;
         //print matches
@@ -385,7 +413,6 @@ public class ClientGUI extends javax.swing.JFrame {
             @Override
             public String getElementAt(int i) { return finalSearch[i]; }
         });
-        
     }
     
     public void printBook(Map<String,String> tempObj){
@@ -401,17 +428,17 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_located.setText(tempObj.get("located"));
         jtxa_obs.setText(tempObj.get("obs"));
     }
+    
+// <editor-fold defaultstate="collapsed" desc="Vars">
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel jLabel1;
     javax.swing.JMenuBar jMenuBar1;
-    javax.swing.JMenuItem jMenuItem_Sair;
-    javax.swing.JMenu jMenu_Ajuda;
-    javax.swing.JMenu jMenu_Arquivo;
     javax.swing.JPanel jPanel_Info;
     javax.swing.JPopupMenu jPopupMenu1;
     javax.swing.JScrollPane jScrollPane_Titles;
     javax.swing.JScrollPane jScrollPane_obs;
+    javax.swing.JPopupMenu.Separator jSeparator1;
     javax.swing.JButton jb_search;
     javax.swing.JLabel jl_author;
     javax.swing.JLabel jl_displayOutdoor;
@@ -424,6 +451,14 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JLabel jl_title;
     javax.swing.JLabel jl_type;
     javax.swing.JLabel jl_vol;
+    javax.swing.JMenu jm_file;
+    javax.swing.JMenuItem jm_file_delete;
+    javax.swing.JMenuItem jm_file_edit;
+    javax.swing.JMenuItem jm_file_exit;
+    javax.swing.JMenuItem jm_file_new;
+    javax.swing.JMenu jm_help;
+    javax.swing.JMenuItem jm_help_about;
+    javax.swing.JMenu jm_options;
     javax.swing.JTextField jtx_author;
     javax.swing.JTextField jtx_edition;
     javax.swing.JTextField jtx_genre;
@@ -441,3 +476,6 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JList<String> list_titles;
     // End of custom variables declaration
 }
+
+
+// </editor-fold>

@@ -40,22 +40,21 @@ public class JsonLoader {
             
             HashMap<String, String> exempleItem = new HashMap<>();
                 exempleItem.put("display", "Exemplo");
-                exempleItem.put("title","TÃ­tulo do Livro");
+                exempleItem.put("title","Título do Livro");
                 exempleItem.put("author","Autor do Livro");
                 exempleItem.put("sub","Complemento do Livro");
                 exempleItem.put("vol","1");
                 exempleItem.put("edition","2");
                 exempleItem.put("genre","Literatura Estrangeira");
-                exempleItem.put("lang","PortuguÃªs");
+                exempleItem.put("lang","Português");
                 exempleItem.put("type","e-book");
                 exempleItem.put("located","Computador da sala");
-                exempleItem.put("obs","Este Ã© um item gerado como exemplo na criÃ§Ã£o do arquivo onde serÃ£o armazenados os dados dos livros.");
+                exempleItem.put("obs","Este é um item gerado como exemplo na criação do arquivo onde serão armazenados os dados dos livros.");
                 
             arrayItem.add(exempleItem);
 
             JSONObject exempleObj = new JSONObject();
             exempleObj.put("items",arrayItem);
-            exempleObj.put("errorMessage","");
             
             try (
                 FileWriter file = new FileWriter(path)) {
@@ -75,7 +74,7 @@ public class JsonLoader {
             String jsonTxt = null;
             
             try {
-                jsonTxt = IOUtils.toString(istream, "UTF-8");
+                jsonTxt = IOUtils.toString(istream, "ISO-8859-1");
             } catch (IOException ex) { Logger.getLogger(WebibliotecaApp.class.getName()).log(Level.SEVERE, null, ex); }
             
             JsonParser mapper = new JsonParser();
