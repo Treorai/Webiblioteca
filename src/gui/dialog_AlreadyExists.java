@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
-/**
- *
- * @author Watto
- */
-public class errGUI_AlreadyExists extends javax.swing.JDialog {
+public class dialog_AlreadyExists extends javax.swing.JDialog {
 
     /**
      * Creates new form AlreadyExistsErrGUI
      * @param parent
      */
-    public errGUI_AlreadyExists(java.awt.Dialog parent) {
+    public dialog_AlreadyExists(java.awt.Dialog parent) {
         super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
@@ -80,7 +72,7 @@ public class errGUI_AlreadyExists extends javax.swing.JDialog {
     public static void main(java.awt.Dialog parent) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new errGUI_AlreadyExists(parent).setVisible(true);
+                new dialog_AlreadyExists(parent).setVisible(true);
             }
         });
     }

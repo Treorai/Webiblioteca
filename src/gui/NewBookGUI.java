@@ -287,12 +287,12 @@ public class NewBookGUI extends javax.swing.JDialog {
         
         //Se titulo vazio ou repetido throw err
         if(this.getCampoDisplay().equals("")){
-            errGUI_EmptyDisplay.main(this);
+            dialog_EmptyDisplay.main(this);
         } else if(newDisplay == false){
-            errGUI_AlreadyExists.main(this);
+            dialog_AlreadyExists.main(this);
         } else{
         //Construir um jsonObj
-        List<Map<String, String>> arrayItem = new ArrayList<>(); //json existente
+        List<Map<String, String>> arrayItem = new ArrayList<>();
             
             HashMap<String, String> pushItem = new HashMap<>();
                 pushItem.put("display",this.getCampoDisplay());

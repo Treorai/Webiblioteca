@@ -2,12 +2,18 @@
 Changes to Webiblioteca Project will be documented in this file.
 
 ## Unreleased
-- Edit module;
-- Delete module;
+- Edit book module;
 - Options menu;
 - About menu;
 
-## Beta 0.3.0 | 2022-8-28
+## Beta 0.4.0 | 2022-8-28
+#### Added
+- Delete Book module;
+
+#### Fixed
+- Table now updates on mouse release;
+
+## Beta 0.3.0 | 2022-8-27
 #### Added
 - New Book module;
 - FlatCyanLightIJ Theme;

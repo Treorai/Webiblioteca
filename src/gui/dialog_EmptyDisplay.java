@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
-/**
- *
- * @author Watto
- */
-public class errGUI_EmptyDisplay extends javax.swing.JDialog {
+public class dialog_EmptyDisplay extends javax.swing.JDialog {
 
     /**
      * Creates new form EmptyDisplayErrGUI
      * @param parent
      */
-    public errGUI_EmptyDisplay(java.awt.Dialog parent) {
+    public dialog_EmptyDisplay(java.awt.Dialog parent) {
         super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
@@ -80,7 +72,7 @@ public class errGUI_EmptyDisplay extends javax.swing.JDialog {
     public static void main(java.awt.Dialog parent) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new errGUI_EmptyDisplay(parent).setVisible(true);
+                new dialog_EmptyDisplay(parent).setVisible(true);
             }
         });
     }

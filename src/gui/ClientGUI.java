@@ -1,9 +1,16 @@
 package gui;
 
+import classes.JsonLoader;
 import classes.pushArray;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONObject;
 
 public class ClientGUI extends javax.swing.JFrame {
     
@@ -301,7 +308,7 @@ public class ClientGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jm_file_exitActionPerformed
 
-    private void list_titlesMouseClicked(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
+    private void list_titlesMouseReleased(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
         jm_file_edit.setEnabled(true);
         jm_file_delete.setEnabled(true);
@@ -326,6 +333,12 @@ public class ClientGUI extends javax.swing.JFrame {
     private void jm_file_newActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
         NewBookGUI.main(this, json, lista);
     }
+    
+    private void jm_file_deleteActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json, String[] lista){
+        
+        dialog_ConfirmDelete.main(this, json, list_titles.getSelectedValue());
+        
+    }
 
 
 
@@ -338,8 +351,8 @@ public class ClientGUI extends javax.swing.JFrame {
         });
         list_titles.setName("");
         list_titles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                list_titlesMouseClicked(evt, json, lista);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                list_titlesMouseReleased(evt, json, lista);
             }
         });
         list_titles.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -360,6 +373,11 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_file_new.addActionListener(new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt){
             jm_file_newActionPerformed(evt, json, lista);
+            }
+        });
+        jm_file_delete.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+            jm_file_deleteActionPerformed(evt, json, lista);
             }
         });
     }
