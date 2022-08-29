@@ -260,7 +260,6 @@ public class NewBookGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_nb_button_cancelActionPerformed
 
     private void nb_button_saveActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista) {
-        
         //Build camps
         this.campoDisplay = this.nb_tf_txtdisplay.getText();
         this.campoAuthor = this.nb_tf_author.getText();
@@ -276,9 +275,10 @@ public class NewBookGUI extends javax.swing.JDialog {
         
         //boolean check for already existing displayname
         boolean newDisplay = true;
-        for(String displayname : lista){
-            if (displayname.equals(this.getCampoDisplay() ) ){
+        for(int i = 0; i < json.size(); i++){
+            if (json.get(i).get("display").equals(this.getCampoDisplay() ) ){
                 newDisplay = false;
+                break;
             }
         }
         

@@ -5,6 +5,10 @@ Changes to Webiblioteca Project will be documented in this file.
 - Edit book module;
 - Options menu;
 
+## Beta 0.5.1 | 2022-8-29
+#### Fixed
+- Fixed a function where it was not updating its size.
+
 ## Beta 0.5.0 | 2022-8-29
 #### Added
 - About menu;
