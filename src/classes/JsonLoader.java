@@ -39,17 +39,17 @@ public class JsonLoader {
             List<Map<String, String>> arrayItem = new ArrayList<>();
             
             HashMap<String, String> exempleItem = new HashMap<>();
-                exempleItem.put("display", "Exemplo");
-                exempleItem.put("title","Título do Livro");
-                exempleItem.put("author","Autor do Livro");
-                exempleItem.put("sub","Complemento do Livro");
-                exempleItem.put("vol","1");
-                exempleItem.put("edition","2");
+                exempleItem.put("display","LEWIS, As Crônicas de Nárnia");
+                exempleItem.put("title","The Chronicles of Narnia");
+                exempleItem.put("author","C. S. Lewis");
+                exempleItem.put("sub","");
+                exempleItem.put("vol","1 ao 7");
+                exempleItem.put("edition","1");
                 exempleItem.put("genre","Literatura Estrangeira");
-                exempleItem.put("lang","Português");
-                exempleItem.put("type","e-book");
-                exempleItem.put("located","Computador da sala");
-                exempleItem.put("obs","Este é um item gerado como exemplo na criação do arquivo onde serão armazenados os dados dos livros.");
+                exempleItem.put("lang","Inglês");
+                exempleItem.put("type","Impresso");
+                exempleItem.put("located","Casa do Wagner");
+                exempleItem.put("obs","Livros: The Magician`s Nephew; The Lion, The Witch and the Wardrobe; The Horse and His Boy; Prince Caspian; The Voyage of the Dawn Treader; The Silver Chair; The Last Battale;");
                 
             arrayItem.add(exempleItem);
 

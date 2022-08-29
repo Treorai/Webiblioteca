@@ -1,8 +1,6 @@
 package gui;
 
 import classes.JsonLoader;
-import classes.pushArray;
-import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -128,11 +126,8 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
             String env = System.getenv("APPDATA");
             String path = env + "\\WebibliotecaFiles\\tablebooks.json";
             File f = new File(path);
-            String windir = env + "\\WebibliotecaFiles";
-            File wdir = new File(windir);
-            //if directory was deleted
-            if (! wdir.exists()){
-                wdir.mkdirs();
+            if(!f.exists()){
+                System.exit(4);
             }
             //Update no db
             try (
@@ -147,19 +142,15 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
     
     private void myInitComponents(List<Map<String, String>> json, String displayName){
         jLabel1.setText(displayName);
-        OK_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OK_buttonActionPerformed(evt, json, displayName);
-            }
+        OK_button.addActionListener((java.awt.event.ActionEvent evt) -> {
+            OK_buttonActionPerformed(evt, json, displayName);
         });
     }
     
     public static void main(java.awt.Frame parent, List<Map<String, String>> json, String displayName) {
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new dialog_ConfirmDelete(parent, json, displayName).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new dialog_ConfirmDelete(parent, json, displayName).setVisible(true);
         });
     }
 

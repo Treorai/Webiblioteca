@@ -1,22 +1,18 @@
 package gui;
 
-import classes.JsonLoader;
 import classes.pushArray;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Desktop;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
 
 public class ClientGUI extends javax.swing.JFrame {
     
-    //private NewBookGUI nbgui;
-
-    public ClientGUI(List<Map<String,String>> json) {
+    public ClientGUI(List<Map<String,String>> json, String version) {
         String[] lista = new String[json.size()];
         for(int i = 0; i < json.size(); i++){
             lista[i] = json.get(i).get("display");
@@ -24,7 +20,7 @@ public class ClientGUI extends javax.swing.JFrame {
         
         beforeInitComponents(json, lista);
         initComponents();
-        laterInitComponents(json, lista);
+        laterInitComponents(json, lista, version);
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -74,11 +70,12 @@ public class ClientGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jm_file_exit = new javax.swing.JMenuItem();
         jm_options = new javax.swing.JMenu();
+        jm_options_vf = new javax.swing.JMenuItem();
         jm_help = new javax.swing.JMenu();
         jm_help_about = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Webiblioteca");
+        setTitle("WEBiblioteca");
 
         jPanel_Info.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -252,6 +249,15 @@ public class ClientGUI extends javax.swing.JFrame {
         jMenuBar1.add(jm_file);
 
         jm_options.setText("Opções");
+
+        jm_options_vf.setText("Abrir pasta de arquivo");
+        jm_options_vf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_options_vfActionPerformed(evt);
+            }
+        });
+        jm_options.add(jm_options_vf);
+
         jMenuBar1.add(jm_options);
 
         jm_help.setText("Ajuda");
@@ -308,6 +314,23 @@ public class ClientGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jm_file_exitActionPerformed
 
+    private void jm_options_vfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_options_vfActionPerformed
+        //Open windows files
+        String env = System.getenv("APPDATA");
+        String folderPath = env + "\\WebibliotecaFiles";
+        
+        Desktop d = null;
+        File f = new File(folderPath);
+        if(Desktop.isDesktopSupported()){
+            d = Desktop.getDesktop();
+            try{
+                d.open(f);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }//GEN-LAST:event_jm_options_vfActionPerformed
+
     private void list_titlesMouseReleased(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
         jm_file_edit.setEnabled(true);
@@ -335,10 +358,23 @@ public class ClientGUI extends javax.swing.JFrame {
     }
     
     private void jm_file_deleteActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json, String[] lista){
-        
         dialog_ConfirmDelete.main(this, json, list_titles.getSelectedValue());
-        
     }
+    
+    private void jm_file_editActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json, String[] lista){
+        //TODO
+        //proceed to edit
+        //open fields
+        //change button
+        //erase
+        //push
+        //rewrite
+    }
+    
+    private void jm_help_aboutActionPerformed(java.awt.event.ActionEvent evt, String version){
+        dialog_About.main(this, version);
+    }
+    
 
 
 
@@ -364,35 +400,34 @@ public class ClientGUI extends javax.swing.JFrame {
     }
     
     //custom InitComponents outside the ide auto generated code that must happen after initComponents()
-    private void laterInitComponents(List<Map<String,String>> json, String[] lista){
-        jb_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_searchActionPerformed(evt, json, lista);
-            }
+    private void laterInitComponents(List<Map<String,String>> json, String[] lista, String version){
+        jb_search.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jb_searchActionPerformed(evt, json, lista);
         });
-        jm_file_new.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
+        jm_file_new.addActionListener((java.awt.event.ActionEvent evt) -> {
             jm_file_newActionPerformed(evt, json, lista);
-            }
         });
-        jm_file_delete.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
+        jm_file_delete.addActionListener((java.awt.event.ActionEvent evt) -> {
             jm_file_deleteActionPerformed(evt, json, lista);
-            }
+        });
+        jm_file_edit.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jm_file_editActionPerformed(evt, json, lista);
+        });
+        jm_help_about.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jm_help_aboutActionPerformed(evt, version);
         });
     }
     
     /**
      * @param json
+     * @param version
      */
-    public static void main(List<Map<String,String>> json) {
+    public static void main(List<Map<String,String>> json, String version) {
         
         FlatCyanLightIJTheme.setup();
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClientGUI(json).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ClientGUI(json, version).setVisible(true);
         });
         
     }
@@ -409,7 +444,7 @@ public class ClientGUI extends javax.swing.JFrame {
             }
         }
         //Load full Object
-        printBook(tempObj);
+        printBook(tempObj, json, lista);
         
     }
     
@@ -433,18 +468,23 @@ public class ClientGUI extends javax.swing.JFrame {
         });
     }
     
-    public void printBook(Map<String,String> tempObj){
-        jl_displayOutdoor.setText(tempObj.get("display"));
-        jtx_title.setText(tempObj.get("title"));
-        jtx_author.setText(tempObj.get("author"));
-        jtx_sub.setText(tempObj.get("sub"));
-        jtx_vol.setText(tempObj.get("vol"));
-        jtx_edition.setText(tempObj.get("edition"));
-        jtx_genre.setText(tempObj.get("genre"));
-        jtx_lang.setText(tempObj.get("lang"));
-        jtx_type.setText(tempObj.get("type"));
-        jtx_located.setText(tempObj.get("located"));
-        jtxa_obs.setText(tempObj.get("obs"));
+    public void printBook(Map<String,String> tempObj, List<Map<String,String>> json, String[] lista){
+        if (tempObj == null){
+            findBook(json, lista);
+        } else {
+            jl_displayOutdoor.setText(tempObj.get("display"));
+            jtx_title.setText(tempObj.get("title"));
+            jtx_author.setText(tempObj.get("author"));
+            jtx_sub.setText(tempObj.get("sub"));
+            jtx_vol.setText(tempObj.get("vol"));
+            jtx_edition.setText(tempObj.get("edition"));
+            jtx_genre.setText(tempObj.get("genre"));
+            jtx_lang.setText(tempObj.get("lang"));
+            jtx_type.setText(tempObj.get("type"));
+            jtx_located.setText(tempObj.get("located"));
+            jtxa_obs.setText(tempObj.get("obs"));
+        }
+        
     }
     
 // <editor-fold defaultstate="collapsed" desc="Vars">
@@ -477,6 +517,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JMenu jm_help;
     javax.swing.JMenuItem jm_help_about;
     javax.swing.JMenu jm_options;
+    javax.swing.JMenuItem jm_options_vf;
     javax.swing.JTextField jtx_author;
     javax.swing.JTextField jtx_edition;
     javax.swing.JTextField jtx_genre;

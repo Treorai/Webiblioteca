@@ -6,7 +6,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +26,7 @@ public class NewBookGUI extends javax.swing.JDialog {
     private String campoLocated;
     private String campoObs;
 
-    /**
-     * Creates new form NewBookGUI
-     */
+    
     public NewBookGUI(java.awt.Frame parent, List<Map<String,String>> json, String[] lista) {
         
         super(parent, true); //only one NewBookGUI at a time
@@ -127,7 +124,7 @@ public class NewBookGUI extends javax.swing.JDialog {
         nb_txtArea_obs.setToolTipText("Coloque observações ou detalhes adicionais aqui");
         jScrollPane1.setViewportView(nb_txtArea_obs);
 
-        nb_cb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Físico", "e-Book", "Xerox", "Audiobook", "Outro" }));
+        nb_cb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Outro", "Impresso", "e-Book", "Xerox", "Audiobook" }));
         nb_cb_type.setToolTipText("");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -291,9 +288,8 @@ public class NewBookGUI extends javax.swing.JDialog {
         } else if(newDisplay == false){
             dialog_AlreadyExists.main(this);
         } else{
-        //Construir um jsonObj
-        List<Map<String, String>> arrayItem = new ArrayList<>();
-            
+            //Construir um jsonObj
+        
             HashMap<String, String> pushItem = new HashMap<>();
                 pushItem.put("display",this.getCampoDisplay());
                 pushItem.put("title",this.getCampoTitle());
@@ -316,11 +312,8 @@ public class NewBookGUI extends javax.swing.JDialog {
             String env = System.getenv("APPDATA");
             String path = env + "\\WebibliotecaFiles\\tablebooks.json";
             File f = new File(path);
-            String windir = env + "\\WebibliotecaFiles";
-            File wdir = new File(windir);
-            //if directory was deleted
-            if (! wdir.exists()){
-                wdir.mkdirs();
+            if(!f.exists()){
+                System.exit(4);
             }
             
             //Update no db
@@ -336,10 +329,8 @@ public class NewBookGUI extends javax.swing.JDialog {
     }   
     
     public static void main(java.awt.Frame parent, List<Map<String,String>> json, String[] lista) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewBookGUI(parent, json, lista).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NewBookGUI(parent, json, lista).setVisible(true);
         });
         
     }

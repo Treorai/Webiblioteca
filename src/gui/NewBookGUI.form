@@ -288,11 +288,11 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
-                <StringItem index="0" value="F&#xed;sico"/>
-                <StringItem index="1" value="e-Book"/>
-                <StringItem index="2" value="Xerox"/>
-                <StringItem index="3" value="Audiobook"/>
-                <StringItem index="4" value="Outro"/>
+                <StringItem index="0" value="Outro"/>
+                <StringItem index="1" value="Impresso"/>
+                <StringItem index="2" value="e-Book"/>
+                <StringItem index="3" value="Xerox"/>
+                <StringItem index="4" value="Audiobook"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
