@@ -1,18 +1,25 @@
 package gui;
 
 import classes.pushArray;
+import classes.Configs;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkSoftIJTheme;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 
 public class ClientGUI extends javax.swing.JFrame {
     
-    public ClientGUI(List<Map<String,String>> json, String version) {
+    public ClientGUI(List<Map<String,String>> json, String version, Configs configs) {
         String[] lista = new String[json.size()];
         for(int i = 0; i < json.size(); i++){
             lista[i] = json.get(i).get("display");
@@ -20,7 +27,10 @@ public class ClientGUI extends javax.swing.JFrame {
         
         beforeInitComponents(json, lista);
         initComponents();
-        laterInitComponents(json, lista, version);
+        laterInitComponents(json, lista, version, configs);
+        if(configs.getProp("LARGEICONS").equals("true")){
+            bigLayoutInitComponents();
+        }
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -34,7 +44,6 @@ public class ClientGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane_Titles = new javax.swing.JScrollPane(list_titles);
         jPanel_Info = new javax.swing.JPanel();
         jl_author = new javax.swing.JLabel();
@@ -59,7 +68,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jScrollPane_obs = new javax.swing.JScrollPane();
         jtxa_obs = new javax.swing.JTextArea();
         jl_displayOutdoor = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jl_magnif = new javax.swing.JLabel();
         jtx_searchbox = new javax.swing.JTextField();
         jb_search = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -71,6 +80,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_file_exit = new javax.swing.JMenuItem();
         jm_options = new javax.swing.JMenu();
         jm_options_vf = new javax.swing.JMenuItem();
+        jm_options_settings = new javax.swing.JMenuItem();
         jm_help = new javax.swing.JMenu();
         jm_help_about = new javax.swing.JMenuItem();
 
@@ -142,14 +152,23 @@ public class ClientGUI extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel_InfoLayout.createSequentialGroup()
                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane_obs)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InfoLayout.createSequentialGroup()
+                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jl_title)
+                                    .addComponent(jl_author))
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtx_title, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                                    .addComponent(jtx_author)
+                                    .addComponent(jl_displayOutdoor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel_InfoLayout.createSequentialGroup()
                                 .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jl_genre)
                                     .addComponent(jl_sub)
                                     .addComponent(jl_type))
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane_obs, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel_InfoLayout.createSequentialGroup()
                                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jtx_located, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,16 +185,7 @@ public class ClientGUI extends javax.swing.JFrame {
                                             .addComponent(jtx_vol, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                                             .addComponent(jtx_edition)
                                             .addComponent(jtx_lang)))
-                                    .addComponent(jtx_sub)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_InfoLayout.createSequentialGroup()
-                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jl_title)
-                                    .addComponent(jl_author))
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtx_title, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-                                    .addComponent(jtx_author)
-                                    .addComponent(jl_displayOutdoor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jtx_sub))))
                         .addContainerGap())))
         );
         jPanel_InfoLayout.setVerticalGroup(
@@ -216,28 +226,33 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jl_obs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane_obs)
+                .addComponent(jScrollPane_obs, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/pesquisar.png"))); // NOI18N
+        jl_magnif.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jl_magnif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/pesquisar.png"))); // NOI18N
 
         jb_search.setText("Buscar");
 
         jm_file.setText("Arquivo");
 
+        jm_file_new.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/page-white-add-icon.png"))); // NOI18N
         jm_file_new.setText("Novo");
         jm_file.add(jm_file_new);
 
+        jm_file_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/page-white-edit-icon.png"))); // NOI18N
         jm_file_edit.setText("Editar");
         jm_file_edit.setEnabled(false);
         jm_file.add(jm_file_edit);
 
+        jm_file_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/page-white-delete-icon.png"))); // NOI18N
         jm_file_delete.setText("Excluir");
         jm_file_delete.setEnabled(false);
         jm_file.add(jm_file_delete);
         jm_file.add(jSeparator1);
 
+        jm_file_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/door_in.png"))); // NOI18N
         jm_file_exit.setText("Sair");
         jm_file_exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +265,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jm_options.setText("Opções");
 
+        jm_options_vf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/folder-explore-icon.png"))); // NOI18N
         jm_options_vf.setText("Abrir pasta de arquivo");
         jm_options_vf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,10 +274,16 @@ public class ClientGUI extends javax.swing.JFrame {
         });
         jm_options.add(jm_options_vf);
 
+        jm_options_settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/brick-edit-icon.png"))); // NOI18N
+        jm_options_settings.setText("Configurações");
+        jm_options_settings.setToolTipText("");
+        jm_options.add(jm_options_settings);
+
         jMenuBar1.add(jm_options);
 
         jm_help.setText("Ajuda");
 
+        jm_help_about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/information-icon.png"))); // NOI18N
         jm_help_about.setText("Sobre");
         jm_help.add(jm_help_about);
 
@@ -275,11 +297,11 @@ public class ClientGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jl_magnif, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtx_searchbox)
+                        .addComponent(jtx_searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jb_search))
                     .addComponent(jScrollPane_Titles, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,7 +314,7 @@ public class ClientGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jl_magnif, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtx_searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jb_search)))
@@ -300,7 +322,7 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel_Info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane_Titles, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel_Info.getAccessibleContext().setAccessibleName("");
@@ -331,6 +353,10 @@ public class ClientGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jm_options_vfActionPerformed
 
+    private void jm_options_settingsActionPerformed(java.awt.event.ActionEvent evt, Configs configs){
+        SettingsGUI.main(this, configs);
+    }
+    
     private void list_titlesMouseReleased(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
         jm_file_edit.setEnabled(true);
@@ -374,8 +400,6 @@ public class ClientGUI extends javax.swing.JFrame {
     private void jm_help_aboutActionPerformed(java.awt.event.ActionEvent evt, String version){
         dialog_About.main(this, version);
     }
-    
-
 
 
     //custom InitComponents outside the ide auto generated code that must happen before initComponents()
@@ -399,8 +423,18 @@ public class ClientGUI extends javax.swing.JFrame {
         
     }
     
+    private void bigLayoutInitComponents(){
+        jm_file_new.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/addbook-large.png")));
+        jm_file_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/editbook-large.png")));
+        jm_file_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/delbook-large.png")));
+        jm_file_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/exit-large.png")));
+        jm_options_vf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/folder-large.png")));
+        jm_options_settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/gear-large.png")));
+        jm_help_about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/infopg-large.png")));
+    }
+    
     //custom InitComponents outside the ide auto generated code that must happen after initComponents()
-    private void laterInitComponents(List<Map<String,String>> json, String[] lista, String version){
+    private void laterInitComponents(List<Map<String,String>> json, String[] lista, String version, Configs configs){
         jb_search.addActionListener((java.awt.event.ActionEvent evt) -> {
             jb_searchActionPerformed(evt, json, lista);
         });
@@ -416,18 +450,27 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_help_about.addActionListener((java.awt.event.ActionEvent evt) -> {
             jm_help_aboutActionPerformed(evt, version);
         });
+        jm_options_settings.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jm_options_settingsActionPerformed(evt, configs);
+        });
     }
     
     /**
      * @param json
      * @param version
+     * @param configs
      */
-    public static void main(List<Map<String,String>> json, String version) {
+    public static void main(List<Map<String,String>> json, String version, Configs configs) {
         
-        FlatCyanLightIJTheme.setup();
+        //get theme settings
+        if (configs.getProp("DARKTHEME").equals("true")){
+            FlatGruvboxDarkSoftIJTheme.setup();
+        } else {
+            FlatCyanLightIJTheme.setup();
+        }
         
         java.awt.EventQueue.invokeLater(() -> {
-            new ClientGUI(json, version).setVisible(true);
+            new ClientGUI(json, version, configs).setVisible(true);
         });
         
     }
@@ -490,10 +533,8 @@ public class ClientGUI extends javax.swing.JFrame {
 // <editor-fold defaultstate="collapsed" desc="Vars">
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JLabel jLabel1;
     javax.swing.JMenuBar jMenuBar1;
     javax.swing.JPanel jPanel_Info;
-    javax.swing.JPopupMenu jPopupMenu1;
     javax.swing.JScrollPane jScrollPane_Titles;
     javax.swing.JScrollPane jScrollPane_obs;
     javax.swing.JPopupMenu.Separator jSeparator1;
@@ -504,6 +545,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JLabel jl_genre;
     javax.swing.JLabel jl_lang;
     javax.swing.JLabel jl_located;
+    javax.swing.JLabel jl_magnif;
     javax.swing.JLabel jl_obs;
     javax.swing.JLabel jl_sub;
     javax.swing.JLabel jl_title;
@@ -517,6 +559,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JMenu jm_help;
     javax.swing.JMenuItem jm_help_about;
     javax.swing.JMenu jm_options;
+    javax.swing.JMenuItem jm_options_settings;
     javax.swing.JMenuItem jm_options_vf;
     javax.swing.JTextField jtx_author;
     javax.swing.JTextField jtx_edition;

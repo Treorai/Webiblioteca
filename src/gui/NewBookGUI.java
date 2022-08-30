@@ -307,12 +307,13 @@ public class NewBookGUI extends javax.swing.JDialog {
                 pushItem.put("located",this.getCampoLocated());
                 pushItem.put("obs",this.getCampoObs());
                 
+                
             json.add(pushItem);
-
+            
             JSONObject newObj = new JSONObject();
             newObj.put("items",json);
             
-            //setup for rewrite
+            //rewrite file
             String env = System.getenv("APPDATA");
             String path = env + "\\WebibliotecaFiles\\tablebooks.json";
             File f = new File(path);
@@ -320,10 +321,9 @@ public class NewBookGUI extends javax.swing.JDialog {
                 System.exit(4);
             }
             
-            //Update no db
             try (
                 FileWriter file = new FileWriter(path)) {
-                file.write(newObj.toJSONString());
+                file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -346,7 +346,7 @@ public class NewBookGUI extends javax.swing.JDialog {
     }
     
     private void qMarksErr(){
-        dialog_QMErrGUI.main(this);
+        dialog_QMErr.main(this);
     }
     
 // <editor-fold defaultstate="collapsed" desc="Getters">

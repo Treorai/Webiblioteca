@@ -2,12 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenu1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jm_file">
@@ -17,17 +11,26 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jm_file_new">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/page-white-add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Novo"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jm_file_edit">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/page-white-edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jm_file_delete">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/page-white-delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -36,6 +39,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jm_file_exit">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/door_in.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
@@ -51,11 +57,23 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jm_options_vf">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/folder-explore-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Abrir pasta de arquivo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jm_options_vfActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jm_options_settings">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/brick-edit-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -66,6 +84,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jm_help_about">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/icons/small/information-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
               </Properties>
             </MenuItem>
@@ -100,11 +121,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jl_magnif" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtx_searchbox" max="32767" attributes="0"/>
+                      <Component id="jtx_searchbox" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jb_search" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -121,7 +142,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jl_magnif" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jtx_searchbox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jb_search" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -132,7 +153,7 @@
                   <Component id="jPanel_Info" max="32767" attributes="0"/>
                   <Component id="jScrollPane_Titles" pref="486" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -173,8 +194,19 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane_obs" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jl_title" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jl_author" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtx_title" alignment="0" pref="571" max="32767" attributes="0"/>
+                                      <Component id="jtx_author" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jl_displayOutdoor" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jl_genre" min="-2" max="-2" attributes="0"/>
                                       <Component id="jl_sub" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -182,6 +214,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane_obs" alignment="1" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jtx_located" min="-2" pref="310" max="-2" attributes="0"/>
@@ -204,18 +237,6 @@
                                           </Group>
                                       </Group>
                                       <Component id="jtx_sub" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jl_title" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jl_author" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jtx_title" alignment="0" pref="571" max="32767" attributes="0"/>
-                                      <Component id="jtx_author" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jl_displayOutdoor" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -269,7 +290,7 @@
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="jl_obs" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane_obs" max="32767" attributes="0"/>
+                  <Component id="jScrollPane_obs" pref="116" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -406,8 +427,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jl_magnif">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/assets/pesquisar.png"/>
         </Property>

@@ -132,7 +132,7 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
             //Update no db
             try (
                 FileWriter file = new FileWriter(path)) {
-                file.write(newObj.toJSONString());
+                file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);
             }
