@@ -5,6 +5,11 @@ Changes to Webiblioteca Project will be documented in this file.
 - Edit book module;
 - Options menu;
 
+## Beta 0.5.2 | 2022-8-29
+#### Changed
+- Added wordwarp support on the "obs" field;
+- Prevent possible bug on pushing the `\"` charactere;
+
 ## Beta 0.5.1 | 2022-8-29
 #### Fixed
 - Fixed a function where it was not updating its size.

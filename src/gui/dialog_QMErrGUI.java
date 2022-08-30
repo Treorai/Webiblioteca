@@ -1,12 +1,12 @@
 package gui;
 
-public class dialog_EmptyDisplay extends javax.swing.JDialog {
+public class dialog_QMErrGUI extends javax.swing.JDialog {
 
     /**
-     * Creates new form EmptyDisplayErrGUI
+     * Creates new form dialog_QMErrGUI
      * @param parent
      */
-    public dialog_EmptyDisplay(java.awt.Dialog parent) {
+    public dialog_QMErrGUI(java.awt.Dialog parent) {
         super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
@@ -28,8 +28,9 @@ public class dialog_EmptyDisplay extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Probleminha");
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/windows-error.png"))); // NOI18N
-        jLabel1.setText("    O Nome de Exibição não pode estar em branco!");
+        jLabel1.setText("  O caractere \" não pode ser usado em nenhum campo!");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -43,23 +44,22 @@ public class dialog_EmptyDisplay extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jButton1)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -71,7 +71,7 @@ public class dialog_EmptyDisplay extends javax.swing.JDialog {
 
     public static void main(java.awt.Dialog parent) {
         java.awt.EventQueue.invokeLater(() -> {
-            new dialog_EmptyDisplay(parent).setVisible(true);
+            new dialog_QMErrGUI(parent).setVisible(true);
         });
     }
 

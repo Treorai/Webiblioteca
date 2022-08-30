@@ -49,7 +49,7 @@ public class JsonLoader {
                 exempleItem.put("lang","Inglês");
                 exempleItem.put("type","Impresso");
                 exempleItem.put("located","Casa do Wagner");
-                exempleItem.put("obs","Livros: The Magician`s Nephew; The Lion, The Witch and the Wardrobe; The Horse and His Boy; Prince Caspian; The Voyage of the Dawn Treader; The Silver Chair; The Last Battale;");
+                exempleItem.put("obs","Livros:\nVol.1 : The Magician's Nephew;\nVol.2 : The Lion, The Witch and the Wardrobe;\nVol.3 : The Horse and His Boy;\nVol.4 : Prince Caspian;\nVol.5 : The Voyage of the Dawn Treader;\nVol.6 : The Silver Chair;\nVol.7 : The Last Battale;");
                 
             arrayItem.add(exempleItem);
 

@@ -273,6 +273,7 @@ public class NewBookGUI extends javax.swing.JDialog {
         this.campoLocated = this.nb_tf_located.getText();
         this.campoObs = this.nb_txtArea_obs.getText();
         
+        
         //boolean check for already existing displayname
         boolean newDisplay = true;
         for(int i = 0; i < json.size(); i++){
@@ -287,6 +288,9 @@ public class NewBookGUI extends javax.swing.JDialog {
             dialog_EmptyDisplay.main(this);
         } else if(newDisplay == false){
             dialog_AlreadyExists.main(this);
+        } else if(this.campoDisplay.contains("\"") || this.campoAuthor.contains("\"") || this.campoTitle.contains("\"") || this.campoSub.contains("\"") || this.campoVol.contains("\"") || this.campoEdition.contains("\"") || this.campoGenre.contains("\"") || this.campoLang.contains("\"") || this.campoType.contains("\"") || this.campoLocated.contains("\"") || this.campoObs.contains("\"")  ){
+            //check for " vulnerabilities
+            qMarksErr();
         } else{
             //Construir um jsonObj
         
@@ -339,6 +343,10 @@ public class NewBookGUI extends javax.swing.JDialog {
     public void close(){
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+    }
+    
+    private void qMarksErr(){
+        dialog_QMErrGUI.main(this);
     }
     
 // <editor-fold defaultstate="collapsed" desc="Getters">

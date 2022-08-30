@@ -482,7 +482,7 @@ public class ClientGUI extends javax.swing.JFrame {
             jtx_lang.setText(tempObj.get("lang"));
             jtx_type.setText(tempObj.get("type"));
             jtx_located.setText(tempObj.get("located"));
-            jtxa_obs.setText(tempObj.get("obs"));
+            jtxa_obs.setText(tempObj.get("obs").replaceAll("\\\\n", System.getProperty("line.separator") ));
         }
         
     }
