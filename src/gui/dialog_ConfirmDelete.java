@@ -42,7 +42,7 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ConfirmaÁ„o");
+        setTitle("Confirma√ß√£o");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<NOME DO LIVRO>");
@@ -59,7 +59,7 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/windows-warning.png"))); // NOI18N
         jLabel2.setText("Tem certeza que deseja apagar o seguinte livro?");
 
-        jLabel3.setText("N„o poder· ser desfeito!");
+        jLabel3.setText("N√£o poder√° ser desfeito!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

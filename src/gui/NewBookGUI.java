@@ -86,21 +86,21 @@ public class NewBookGUI extends javax.swing.JDialog {
 
         nb_button_save.setText("Salvar");
 
-        nb_jl_display.setText("Nome de Exibição:");
+        nb_jl_display.setText("Nome de ExibiÃ§Ã£o:");
 
-        nb_tf_txtdisplay.setToolTipText("Nome que será exibido na lista de livros");
+        nb_tf_txtdisplay.setToolTipText("Nome que serÃ¡ exibido na lista de livros");
 
         nb_jl_author.setText("Autor:");
 
-        nb_jl_title.setText("Título");
+        nb_jl_title.setText("TÃ­tulo");
 
-        nb_jl_sub.setText("Subtítulo:");
+        nb_jl_sub.setText("SubtÃ­tulo:");
 
         nb_jl_vol.setText("Volume:");
 
-        nb_jl_edition.setText("Edição:");
+        nb_jl_edition.setText("EdiÃ§Ã£o:");
 
-        nb_jl_genre.setText("Gênero:");
+        nb_jl_genre.setText("GÃªnero:");
 
         nb_jl_lang.setText("Idioma:");
 
@@ -112,15 +112,15 @@ public class NewBookGUI extends javax.swing.JDialog {
 
         nb_tf_title.setToolTipText("");
 
-        nb_tf_sub.setToolTipText("Complemento do título");
+        nb_tf_sub.setToolTipText("");
 
-        nb_tf_located.setToolTipText("Local onde o livro é guardado, computador em que está gravado ou outra especificação");
+        nb_tf_located.setToolTipText("Local onde o livro Ã© guardado, computador em que estÃ¡ gravado ou outra especificaÃ§Ã£o");
 
-        nb_jl_obs.setText("Observação:");
+        nb_jl_obs.setText("ObservaÃ§Ã£o:");
 
         nb_txtArea_obs.setColumns(20);
         nb_txtArea_obs.setRows(5);
-        nb_txtArea_obs.setToolTipText("Coloque observações ou detalhes adicionais aqui");
+        nb_txtArea_obs.setToolTipText("Coloque observaÃ§Ãµes ou detalhes adicionais aqui");
         jScrollPane1.setViewportView(nb_txtArea_obs);
 
         nb_cb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Outro", "Impresso", "e-Book", "Xerox", "Audiobook" }));

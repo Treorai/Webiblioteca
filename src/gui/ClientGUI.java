@@ -95,16 +95,16 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_author.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         jl_title.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jl_title.setText("Título:");
+        jl_title.setText("TÃ­tulo");
 
         jtx_title.setEditable(false);
         jtx_title.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
-        jl_sub.setText("Subtítulo:");
+        jl_sub.setText("SubtÃ­tulo");
 
         jtx_sub.setEditable(false);
 
-        jl_genre.setText("Gênero:");
+        jl_genre.setText("GÃªnero:");
 
         jtx_genre.setEditable(false);
 
@@ -116,7 +116,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jtx_type.setEditable(false);
 
-        jl_edition.setText("Edição:");
+        jl_edition.setText("EdiÃ§Ã£o:");
 
         jtx_edition.setEditable(false);
 
@@ -128,7 +128,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jtx_lang.setEditable(false);
 
-        jl_obs.setText("Observações");
+        jl_obs.setText("ObservaÃ§Ãµes");
 
         jtxa_obs.setEditable(false);
         jtxa_obs.setColumns(20);
@@ -181,7 +181,7 @@ public class ClientGUI extends javax.swing.JFrame {
                                             .addComponent(jl_vol))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtx_vol, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                            .addComponent(jtx_vol, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                             .addComponent(jtx_edition)
                                             .addComponent(jtx_lang)))
                                     .addComponent(jtx_sub))))
@@ -262,7 +262,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jm_file);
 
-        jm_options.setText("Opções");
+        jm_options.setText("OpÃ§Ãµes");
 
         jm_options_vf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/folder-explore-icon.png"))); // NOI18N
         jm_options_vf.setText("Abrir pasta de arquivo");
@@ -274,7 +274,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_options.add(jm_options_vf);
 
         jm_options_settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/brick-edit-icon.png"))); // NOI18N
-        jm_options_settings.setText("Configurações");
+        jm_options_settings.setText("ConfiguraÃ§Ãµes");
         jm_options_settings.setToolTipText("");
         jm_options.add(jm_options_settings);
 

@@ -29,7 +29,7 @@ public class dialog_AlreadyExists extends javax.swing.JDialog {
         setTitle("Probleminha");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/windows-error.png"))); // NOI18N
-        jLabel1.setText("   Este Nome de ExibiÁ„o j· existe!");
+        jLabel1.setText("   Este Nome de Exibi√ß√£o j√° existe!");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

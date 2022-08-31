@@ -29,7 +29,7 @@ public class dialog_EmptyDisplay extends javax.swing.JDialog {
         setTitle("Probleminha");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/windows-error.png"))); // NOI18N
-        jLabel1.setText("    O Nome de ExibiÁ„o n„o pode estar em branco!");
+        jLabel1.setText("    O Nome de Exibi√ß√£o n√£o pode estar em branco!");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -58,7 +58,7 @@ public class SettingsGUI extends javax.swing.JDialog {
         effectlabeladv = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ConfiguraÁıes");
+        setTitle("Configura√ß√µes");
 
         jPanel_theme.setBorder(javax.swing.BorderFactory.createTitledBorder("Tema"));
 
@@ -68,7 +68,7 @@ public class SettingsGUI extends javax.swing.JDialog {
         bg_theme.add(theme_jr_light);
         theme_jr_light.setText("Claro");
 
-        jckb_largeicons.setText("Usar Õcones Grandes");
+        jckb_largeicons.setText("Usar √çcones Grandes");
 
         javax.swing.GroupLayout jPanel_themeLayout = new javax.swing.GroupLayout(jPanel_theme);
         jPanel_theme.setLayout(jPanel_themeLayout);
@@ -220,7 +220,7 @@ public class SettingsGUI extends javax.swing.JDialog {
                 Logger.getLogger(SettingsGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            effectlabeladv.setText("… necess·ro reiniciar o programa para ter efeito.  ");
+            effectlabeladv.setText("√â necess√°ro reiniciar o programa para ter efeito.  ");
         }
     }//GEN-LAST:event_jb_importbuttonActionPerformed
 
@@ -267,7 +267,7 @@ public class SettingsGUI extends javax.swing.JDialog {
             
         } else {
             jb_apply.setEnabled(true);
-            effectlabeladv.setText("… necess·ro reiniciar o programa para ter efeito.  ");
+            effectlabeladv.setText("√â necess√°ro reiniciar o programa para ter efeito.  ");
         }
         
     }

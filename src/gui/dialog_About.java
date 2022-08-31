@@ -74,7 +74,7 @@ public class dialog_About extends javax.swing.JDialog {
         );
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("© Watto. All rights reserved.");
+        jLabel5.setText("Â© Watto. All rights reserved.");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("contato.watto@gmail.com");

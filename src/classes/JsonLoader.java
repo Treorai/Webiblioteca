@@ -39,14 +39,14 @@ public class JsonLoader {
             List<Map<String, String>> arrayItem = new ArrayList<>();
             
             HashMap<String, String> exempleItem = new HashMap<>();
-                exempleItem.put("display","LEWIS, As Crônicas de Nárnia");
+                exempleItem.put("display","LEWIS, As CrÃ´nicas de NÃ¡rnia");
                 exempleItem.put("title","The Chronicles of Narnia");
                 exempleItem.put("author","C. S. Lewis");
                 exempleItem.put("sub","");
                 exempleItem.put("vol","1 ao 7");
                 exempleItem.put("edition","1");
                 exempleItem.put("genre","Literatura Estrangeira");
-                exempleItem.put("lang","Inglês");
+                exempleItem.put("lang","InglÃªs");
                 exempleItem.put("type","Impresso");
                 exempleItem.put("located","Casa do Wagner");
                 exempleItem.put("obs","Livros:\nVol.1 : The Magician's Nephew;\nVol.2 : The Lion, The Witch and the Wardrobe;\nVol.3 : The Horse and His Boy;\nVol.4 : Prince Caspian;\nVol.5 : The Voyage of the Dawn Treader;\nVol.6 : The Silver Chair;\nVol.7 : The Last Battale;");
@@ -73,7 +73,7 @@ public class JsonLoader {
             String jsonTxt = null;
             
             try {
-                jsonTxt = IOUtils.toString(istream, "ISO-8859-1");
+                jsonTxt = IOUtils.toString(istream, "UTF-8");
             } catch (IOException ex) { Logger.getLogger(WebibliotecaApp.class.getName()).log(Level.SEVERE, null, ex); }
             
             JsonParser mapper = new JsonParser();

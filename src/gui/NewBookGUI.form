@@ -247,7 +247,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="nb_tf_sub">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Complemento do t&#xed;tulo"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nb_tf_vol">

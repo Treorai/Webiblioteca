@@ -30,7 +30,7 @@ public class dialog_QMErr extends javax.swing.JDialog {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/windows-error.png"))); // NOI18N
-        jLabel1.setText("  O caracteres \" e \\ n„o pode ser usados!");
+        jLabel1.setText("  O caracteres \" e \\ n√£o pode ser usados!");
 
         jb_OK.setText("OK");
         jb_OK.addActionListener(new java.awt.event.ActionListener() {

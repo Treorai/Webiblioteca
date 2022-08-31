@@ -231,7 +231,7 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jtx_vol" alignment="0" pref="186" max="32767" attributes="0"/>
+                                              <Component id="jtx_vol" alignment="0" pref="189" max="32767" attributes="0"/>
                                               <Component id="jtx_edition" max="32767" attributes="0"/>
                                               <Component id="jtx_lang" alignment="0" max="32767" attributes="0"/>
                                           </Group>
@@ -318,7 +318,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xed;tulo:"/>
+            <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_title">
@@ -331,7 +331,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jl_sub">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Subt&#xed;tulo:"/>
+            <Property name="text" type="java.lang.String" value="Subt&#xed;tulo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtx_sub">
