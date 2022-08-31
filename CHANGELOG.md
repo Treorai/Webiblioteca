@@ -5,6 +5,11 @@ Changes to Webiblioteca Project will be documented in this file.
 
 ## Unreleased
 
+## Beta 0.7.1 | 2022-8-31
+
+#### Changed
+
+- Encoding changed from ISO-8859-1 to UTF-8
 
 ## Beta 0.7.0 | 2022-8-31
 
