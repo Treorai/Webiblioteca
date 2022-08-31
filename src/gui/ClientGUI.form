@@ -125,9 +125,9 @@
                   <Group type="102" attributes="0">
                       <Component id="jl_magnif" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtx_searchbox" min="-2" pref="137" max="-2" attributes="0"/>
+                      <Component id="jtx_searchbox" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jb_search" min="-2" max="-2" attributes="0"/>
+                      <Component id="jb_search" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane_Titles" min="-2" pref="249" max="-2" attributes="0"/>
               </Group>

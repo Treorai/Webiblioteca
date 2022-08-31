@@ -5,8 +5,19 @@ Changes to Webiblioteca Project will be documented in this file.
 
 ## Unreleased
 
-- Edit book module;
-- Backup module;
+
+## Beta 0.7.0 | 2022-8-31
+
+### Closed Beta Release
+
+#### Added
+
+- Edit module;
+- Backup system;
+
+#### Fixed
+
+- Minor bugs fixes;
 
 
 ## Beta 0.6.0 | 2022-8-31

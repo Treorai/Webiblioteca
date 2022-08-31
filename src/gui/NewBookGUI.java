@@ -33,7 +33,6 @@ public class NewBookGUI extends javax.swing.JDialog {
         
         initComponents();
         myInitComponents(json, lista);
-        
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -283,16 +282,17 @@ public class NewBookGUI extends javax.swing.JDialog {
             }
         }
         
-        //Se titulo vazio ou repetido throw err
+        //check for empty display and \" vulnerability
         if(this.getCampoDisplay().equals("")){
             dialog_EmptyDisplay.main(this);
         } else if(newDisplay == false){
             dialog_AlreadyExists.main(this);
         } else if(this.campoDisplay.contains("\"") || this.campoAuthor.contains("\"") || this.campoTitle.contains("\"") || this.campoSub.contains("\"") || this.campoVol.contains("\"") || this.campoEdition.contains("\"") || this.campoGenre.contains("\"") || this.campoLang.contains("\"") || this.campoType.contains("\"") || this.campoLocated.contains("\"") || this.campoObs.contains("\"")  ){
-            //check for " vulnerabilities
             qMarksErr();
-        } else{
-            //Construir um jsonObj
+        } else if(this.campoDisplay.contains("\\") || this.campoAuthor.contains("\\") || this.campoTitle.contains("\\") || this.campoSub.contains("\\") || this.campoVol.contains("\\") || this.campoEdition.contains("\\") || this.campoGenre.contains("\\") || this.campoLang.contains("\\") || this.campoType.contains("\\") || this.campoLocated.contains("\\") || this.campoObs.contains("\\")  ){
+            qMarksErr();
+        }else{
+            //build a jsonObj
         
             HashMap<String, String> pushItem = new HashMap<>();
                 pushItem.put("display",this.getCampoDisplay());
@@ -321,8 +321,7 @@ public class NewBookGUI extends javax.swing.JDialog {
                 System.exit(4);
             }
             
-            try (
-                FileWriter file = new FileWriter(path)) {
+            try(FileWriter file = new FileWriter(path)){
                 file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);

@@ -56,8 +56,7 @@ public class JsonLoader {
             JSONObject exempleObj = new JSONObject();
             exempleObj.put("items",arrayItem);
             
-            try (
-                FileWriter file = new FileWriter(path)) {
+            try(FileWriter file = new FileWriter(path)){
                 file.write(exempleObj.toJSONString());
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,8 +1,5 @@
 package gui;
 
-import java.util.List;
-import java.util.Map;
-
 public class dialog_About extends javax.swing.JDialog {
 
     /**

@@ -2,6 +2,7 @@ package gui;
 
 import classes.pushArray;
 import classes.Configs;
+import classes.JsonLoader;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkSoftIJTheme;
 import java.util.List;
@@ -9,13 +10,11 @@ import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Desktop;
-import java.awt.image.BufferedImage;
+import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
+import org.json.simple.JSONObject;
 
 public class ClientGUI extends javax.swing.JFrame {
     
@@ -301,9 +300,9 @@ public class ClientGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jl_magnif, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtx_searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtx_searchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_search))
+                        .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane_Titles, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_Info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -353,48 +352,70 @@ public class ClientGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jm_options_vfActionPerformed
 
-    private void jm_options_settingsActionPerformed(java.awt.event.ActionEvent evt, Configs configs){
-        SettingsGUI.main(this, configs);
+    private void jm_options_settingsActionPerformed(java.awt.event.ActionEvent evt, Configs configs, List<Map<String, String>> json){
+        SettingsGUI.main(this, configs, json);
+    }
+    
+    private void jb_searchActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
+        findBook(json, lista);
+        
+        if(jb_search.getText().equals("Salvar")){
+            //if editing
+            runEditBook(json);
+        } else if(jb_search.getText().equals("Atualizar")){
+            jb_search.setText("Buscar");
+        }
+        
+        jm_file_edit.setEnabled(false);
+        jm_file_delete.setEnabled(false);
+        
+        
     }
     
     private void list_titlesMouseReleased(java.awt.event.MouseEvent evt, List<Map<String,String>> json, String[] lista){
         openBook(json, lista);
         jm_file_edit.setEnabled(true);
         jm_file_delete.setEnabled(true);
-    }
-    
-    private void jb_searchActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
-        findBook(json, lista);
-        jm_file_edit.setEnabled(false);
-        jm_file_delete.setEnabled(false);
+        closeFields(false);
     }
     
     private void list_titlesKeyReleased(java.awt.event.KeyEvent evt, List<Map<String,String>> json, String[] lista){
         try{
             openBook(json, lista);
+            jm_file_edit.setEnabled(true);
+            jm_file_delete.setEnabled(true);
+            closeFields(false);
         }catch(Exception e){
             //do not crash if cannot find something to select
         }
-        jm_file_edit.setEnabled(true);
-        jm_file_delete.setEnabled(true);
     }
     
     private void jm_file_newActionPerformed(java.awt.event.ActionEvent evt, List<Map<String,String>> json, String[] lista){
+        closeFields(true);
         NewBookGUI.main(this, json, lista);
     }
     
     private void jm_file_deleteActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json, String[] lista){
+        closeFields(true);
         dialog_ConfirmDelete.main(this, json, list_titles.getSelectedValue());
+        
     }
     
     private void jm_file_editActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json, String[] lista){
-        //TODO
-        //proceed to edit
         //open fields
+        jtx_author.setEditable(true);
+        jtx_edition.setEditable(true);
+        jtx_genre.setEditable(true);
+        jtx_lang.setEditable(true);
+        jtx_located.setEditable(true);
+        jtx_sub.setEditable(true);
+        jtx_title.setEditable(true);
+        jtx_vol.setEditable(true);
+        jtxa_obs.setEditable(true);
+        
         //change button
-        //erase
-        //push
-        //rewrite
+        jb_search.setText("Salvar");
+        
     }
     
     private void jm_help_aboutActionPerformed(java.awt.event.ActionEvent evt, String version){
@@ -451,7 +472,7 @@ public class ClientGUI extends javax.swing.JFrame {
             jm_help_aboutActionPerformed(evt, version);
         });
         jm_options_settings.addActionListener((java.awt.event.ActionEvent evt) -> {
-            jm_options_settingsActionPerformed(evt, configs);
+            jm_options_settingsActionPerformed(evt, configs, json);
         });
     }
     
@@ -527,7 +548,76 @@ public class ClientGUI extends javax.swing.JFrame {
             jtx_located.setText(tempObj.get("located"));
             jtxa_obs.setText(tempObj.get("obs").replaceAll("\\\\n", System.getProperty("line.separator") ));
         }
+    }
+    
+    public void runEditBook(List<Map<String, String>> json){
+        //check \" vulnerability
+        if(jtx_author.getText().contains("\"") || jtx_title.getText().contains("\"") || jtx_sub.getText().contains("\"") || jtx_vol.getText().contains("\"") || jtx_edition.getText().contains("\"") || jtx_genre.getText().contains("\"") || jtx_lang.getText().contains("\"") || jtx_type.getText().contains("\"") || jtx_located.getText().contains("\"") || jtxa_obs.getText().contains("\"")  ){
+            dialog_QMErr.main(new javax.swing.JDialog());
+        } else if(jtx_author.getText().contains("\\") || jtx_title.getText().contains("\\") || jtx_sub.getText().contains("\\") || jtx_vol.getText().contains("\\") || jtx_edition.getText().contains("\\") || jtx_genre.getText().contains("\\") || jtx_lang.getText().contains("\\") || jtx_type.getText().contains("\\") || jtx_located.getText().contains("\\") || jtxa_obs.getText().contains("\\")  ){
+            dialog_QMErr.main(new javax.swing.JDialog());
+        } else{
+            //erase old
+            Map<String, String> tempObj = null;
+            for(int i = 0; i < json.size(); i++){
+                if(jl_displayOutdoor.getText().equals(json.get(i).get("display"))){
+                    tempObj = json.get(i);
+                    break;
+                }
+            }
+            json.remove(tempObj);
+            
+            //build a jsonObj
+            HashMap<String, String> pushItem = new HashMap<>();
+                pushItem.put("display",jl_displayOutdoor.getText());
+                pushItem.put("title",jtx_title.getText());
+                pushItem.put("author",jtx_author.getText());
+                pushItem.put("sub",jtx_sub.getText());
+                pushItem.put("vol",jtx_vol.getText());
+                pushItem.put("edition",jtx_edition.getText());
+                pushItem.put("genre",jtx_genre.getText());
+                pushItem.put("lang",jtx_lang.getText());
+                pushItem.put("type",jtx_type.getText());
+                pushItem.put("located",jtx_located.getText());
+                pushItem.put("obs",jtxa_obs.getText());
+                
+            json.add(pushItem);
+            
+            JSONObject newObj = new JSONObject();
+            newObj.put("items",json);
+            
+            //rewrite file
+            String env = System.getenv("APPDATA");
+            String path = env + "\\WebibliotecaFiles\\tablebooks.json";
+            File f = new File(path);
+            if(!f.exists()){
+                System.exit(4);
+            }
+            
+            try(FileWriter file = new FileWriter(path)){
+                file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
+            } catch (IOException ex) {
+                Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            closeFields(true);
+            
+        }
+    }
+    
+    public void closeFields(Boolean refresh){
+        if(refresh.equals(true) || jb_search.getText().equals("Salvar")){
+            jb_search.setText("Atualizar");
+        }
         
+        jtx_author.setEditable(false);
+        jtx_edition.setEditable(false);
+        jtx_genre.setEditable(false);
+        jtx_lang.setEditable(false);
+        jtx_located.setEditable(false);
+        jtx_sub.setEditable(false);
+        jtx_title.setEditable(false);
+        jtx_vol.setEditable(false);
+        jtxa_obs.setEditable(false);
     }
     
 // <editor-fold defaultstate="collapsed" desc="Vars">

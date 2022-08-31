@@ -118,7 +118,8 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
             }
         }
         
-        json.remove(tempObj);JSONObject newObj = new JSONObject();
+        json.remove(tempObj);
+        JSONObject newObj = new JSONObject();
         newObj.put("items",json);
             
         //rewrite file
@@ -130,8 +131,7 @@ public class dialog_ConfirmDelete extends javax.swing.JDialog {
                 System.exit(4);
             }
             //Update no db
-            try (
-                FileWriter file = new FileWriter(path)) {
+            try(FileWriter file = new FileWriter(path)){
                 file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);

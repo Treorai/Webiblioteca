@@ -1,6 +1,21 @@
 package gui;
 
 import classes.Configs;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+import org.json.simple.JSONObject;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class SettingsGUI extends javax.swing.JDialog {
 
@@ -8,11 +23,12 @@ public class SettingsGUI extends javax.swing.JDialog {
      * Creates new form SettingsGUI
      * @param parent
      * @param configs
+     * @param json
      */
-    public SettingsGUI(java.awt.Frame parent, Configs configs) {
+    public SettingsGUI(java.awt.Frame parent, Configs configs, List<Map<String, String>> json) {
         super(parent, true);
         initComponents();
-        laterInitComponents(configs);
+        laterInitComponents(configs, json);
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -39,6 +55,7 @@ public class SettingsGUI extends javax.swing.JDialog {
         jb_importbutton = new javax.swing.JButton();
         jl_export = new javax.swing.JLabel();
         jb_exportbutton = new javax.swing.JButton();
+        effectlabeladv = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurações");
@@ -93,6 +110,11 @@ public class SettingsGUI extends javax.swing.JDialog {
         jl_import.setText("Importar Biblioteca");
 
         jb_importbutton.setText("Selecionar Arquivo");
+        jb_importbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_importbuttonActionPerformed(evt);
+            }
+        });
 
         jl_export.setText("Exportar Biblioteca");
 
@@ -124,25 +146,30 @@ public class SettingsGUI extends javax.swing.JDialog {
                 .addGroup(jPanel_backupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jl_export)
                     .addComponent(jb_exportbutton))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        effectlabeladv.setForeground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_backup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_theme, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_backup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jb_save)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_cancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_apply)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jb_save)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jb_cancel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jb_apply))
+                            .addComponent(effectlabeladv, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,8 +178,10 @@ public class SettingsGUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel_backup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel_backup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(effectlabeladv)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_apply)
                     .addComponent(jb_cancel)
@@ -167,6 +196,58 @@ public class SettingsGUI extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jb_cancelActionPerformed
 
+    private void jb_importbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_importbuttonActionPerformed
+        
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        j.setAcceptAllFileFilterUsed(false);
+        j.setDialogTitle("Selecione um arquivo de backup");
+        j.addChoosableFileFilter(new FileNameExtensionFilter("wblibbk files", "wblibbk"));
+        int r = j.showOpenDialog(null);
+        
+        // if user selects a file
+        if (r == JFileChooser.APPROVE_OPTION) {
+            String env = System.getenv("APPDATA");
+            String newpath = env + "\\WebibliotecaFiles\\tablebooks.json";
+            String windir = env + "\\WebibliotecaFiles";
+            File wdir = new File(windir);
+            if (! wdir.exists()){
+                wdir.mkdirs();
+            }
+            Path destpath = Paths.get(newpath);
+            try {
+                Files.copy(j.getSelectedFile().toPath(), destpath, REPLACE_EXISTING );
+            } catch (IOException ex) {
+                Logger.getLogger(SettingsGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            effectlabeladv.setText("É necessáro reiniciar o programa para ter efeito.  ");
+        }
+    }//GEN-LAST:event_jb_importbuttonActionPerformed
+
+    private void jb_exportbuttonActionPerformed(java.awt.event.ActionEvent evt, List<Map<String, String>> json){
+        
+        JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.setDialogTitle("Salvar arquivo de backup");
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("wblibbk files", "wblibbk"));
+        int r = fc.showSaveDialog(this);
+        
+        // if user selects a file
+        if (r == JFileChooser.APPROVE_OPTION){
+            File f = fc.getSelectedFile();
+            
+            try(FileWriter fw = new FileWriter(f+".wblibbk");) {   
+                
+                JSONObject newObj = new JSONObject();
+                newObj.put("items",json);
+                fw.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(SettingsGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     private void theme_jr_darkActionPerformed(java.awt.event.ActionEvent evt, Configs configs){
         enableApplyButton(configs);
     }
@@ -182,9 +263,13 @@ public class SettingsGUI extends javax.swing.JDialog {
     private void enableApplyButton(Configs configs){
         if(String.valueOf(theme_jr_dark.isSelected()).equals(configs.getProp("DARKTHEME")) && String.valueOf(jckb_largeicons.isSelected()).equals(configs.getProp("LARGEICONS")) ){
             jb_apply.setEnabled(false);
+            effectlabeladv.setText("");
+            
         } else {
             jb_apply.setEnabled(true);
+            effectlabeladv.setText("É necessáro reiniciar o programa para ter efeito.  ");
         }
+        
     }
     
     private void jb_applyActionPerformed(java.awt.event.ActionEvent evt, Configs configs){
@@ -199,7 +284,7 @@ public class SettingsGUI extends javax.swing.JDialog {
         this.dispose();
     }
     
-    private void laterInitComponents(Configs configs){
+    private void laterInitComponents(Configs configs, List<Map<String, String>> json){
         //start layout with the current configuration
         if (configs.getProp("DARKTHEME").equals("true")){
             theme_jr_dark.setSelected(true);
@@ -231,20 +316,27 @@ public class SettingsGUI extends javax.swing.JDialog {
             jckb_largeiconsActionPerformed(evt, configs);
         });
         jb_apply.setEnabled(false);
+        
+        jb_exportbutton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jb_exportbuttonActionPerformed(evt, json);
+        });
+        
     }
     /**
      * @param parent
      * @param configs
+     * @param json
      */
-    public static void main(java.awt.Frame parent, Configs configs) {
+    public static void main(java.awt.Frame parent, Configs configs, List<Map<String, String>> json) {
         
         java.awt.EventQueue.invokeLater(() -> {
-            new SettingsGUI(parent, configs).setVisible(true);
+            new SettingsGUI(parent, configs, json).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bg_theme;
+    private javax.swing.JLabel effectlabeladv;
     private javax.swing.JPanel jPanel_backup;
     private javax.swing.JPanel jPanel_theme;
     private javax.swing.JButton jb_apply;
