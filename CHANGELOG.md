@@ -5,6 +5,14 @@ Changes to Webiblioteca Project will be documented in this file.
 
 ## Unreleased
 
+## 1.0.0 | 2022-10-13
+
+### Official Release
+
+#### Fixed
+
+- Settings GUI wrong encode specification;
+
 ## Beta 0.7.1 | 2022-8-31
 
 #### Changed

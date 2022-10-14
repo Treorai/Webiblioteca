@@ -45,7 +45,7 @@ public class dialog_About extends javax.swing.JDialog {
 
         jLabel3.setText("Java 18.0.2");
 
-        jLabel4.setText("ISO 8859-1");
+        jLabel4.setText("UTF-8");
 
         jLabel10.setText("Apache NetBeans IDE 13");
 
