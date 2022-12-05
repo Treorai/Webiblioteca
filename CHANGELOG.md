@@ -1,9 +1,14 @@
 # Change Log
 
-Changes to Webiblioteca Project will be documented in this file.
+Changes to WEBiblioteca Project will be documented in this file.
 
 
-## Unreleased
+## 1.0.1 | 2022-12-5
+
+#### Changed
+
+- First time run file creation info;
+- Removed blank space at header;
 
 ## 1.0.0 | 2022-10-13
 
@@ -17,7 +22,7 @@ Changes to Webiblioteca Project will be documented in this file.
 
 #### Changed
 
-- Encoding changed from ISO-8859-1 to UTF-8
+- Encoding changed from ISO-8859-1 to UTF-8;
 
 ## Beta 0.7.0 | 2022-8-31
 

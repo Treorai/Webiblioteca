@@ -48,7 +48,7 @@ public class JsonLoader {
                 exempleItem.put("genre","Literatura Estrangeira");
                 exempleItem.put("lang","Inglês");
                 exempleItem.put("type","Impresso");
-                exempleItem.put("located","Casa do Wagner");
+                exempleItem.put("located","Santa Maria");
                 exempleItem.put("obs","Livros:\nVol.1 : The Magician's Nephew;\nVol.2 : The Lion, The Witch and the Wardrobe;\nVol.3 : The Horse and His Boy;\nVol.4 : Prince Caspian;\nVol.5 : The Voyage of the Dawn Treader;\nVol.6 : The Silver Chair;\nVol.7 : The Last Battale;");
                 
             arrayItem.add(exempleItem);
