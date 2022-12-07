@@ -2,6 +2,33 @@
 
 Changes to WEBiblioteca Project will be documented in this file.
 
+## 1.0.3 | 2022-12-7
+
+#### Added
+
+- User Manual Interface and files;
+
+#### Changed
+
+- Library json load method;
+
+#### Fixed
+
+- Bug when opening the program without any book on json;
+
+## 1.0.2 | 2022-12-6
+
+#### Changed
+
+- Dark theme is now blueish;
+
+#### Deprecated
+
+- Disabled brown dark theme;
+
+#### Fixed
+
+- Workaround known bug where "oberservações" would print random \r or \n or \ on the json file;
 
 ## 1.0.1 | 2022-12-5
 
@@ -16,7 +43,7 @@ Changes to WEBiblioteca Project will be documented in this file.
 
 #### Fixed
 
-- Settings GUI wrong encode specification;
+- Wrong encode specification at dialog_About.java;
 
 ## Beta 0.7.1 | 2022-8-31
 

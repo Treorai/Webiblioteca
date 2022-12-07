@@ -4,13 +4,16 @@ import classes.pushArray;
 import classes.Configs;
 import classes.JsonLoader;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkSoftIJTheme;
+//import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkSoftIJTheme; //deprecated brown theme
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
 import java.io.IOException;
 import java.awt.Desktop;
 import java.io.FileWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,6 +84,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_options_vf = new javax.swing.JMenuItem();
         jm_options_settings = new javax.swing.JMenuItem();
         jm_help = new javax.swing.JMenu();
+        jm_help_manual = new javax.swing.JMenuItem();
         jm_help_about = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -282,6 +286,15 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jm_help.setText("Ajuda");
 
+        jm_help_manual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/help-icon.png"))); // NOI18N
+        jm_help_manual.setText("Manual");
+        jm_help_manual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_help_manualActionPerformed(evt);
+            }
+        });
+        jm_help.add(jm_help_manual);
+
         jm_help_about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/small/information-icon.png"))); // NOI18N
         jm_help_about.setText("Sobre");
         jm_help.add(jm_help_about);
@@ -351,6 +364,14 @@ public class ClientGUI extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_jm_options_vfActionPerformed
+
+    private void jm_help_manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_help_manualActionPerformed
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI("www.google.com"));
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jm_help_manualActionPerformed
 
     private void jm_options_settingsActionPerformed(java.awt.event.ActionEvent evt, Configs configs, List<Map<String, String>> json){
         SettingsGUI.main(this, configs, json);
@@ -452,6 +473,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jm_options_vf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/folder-large.png")));
         jm_options_settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/gear-large.png")));
         jm_help_about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/infopg-large.png")));
+        jm_help_manual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/large/book-icon-manual.png")));
     }
     
     //custom InitComponents outside the ide auto generated code that must happen after initComponents()
@@ -485,7 +507,9 @@ public class ClientGUI extends javax.swing.JFrame {
         
         //get theme settings
         if (configs.getProp("DARKTHEME").equals("true")){
-            FlatGruvboxDarkSoftIJTheme.setup();
+            //FlatGruvboxDarkSoftIJTheme.setup(); //deprecated brown theme
+            FlatArcDarkIJTheme.setup();
+            
         } else {
             FlatCyanLightIJTheme.setup();
         }
@@ -502,10 +526,12 @@ public class ClientGUI extends javax.swing.JFrame {
         
         //Find the selected titles obj
         for(int i = 0; i < json.size(); i++){
+            try{
             if(list_titles.getSelectedValue().equals(json.get(i).get("display"))){
                 tempObj = json.get(i);
                 break;
             }
+            }catch(NullPointerException e){System.out.println("Err: Empty list");}
         }
         //Load full Object
         printBook(tempObj, json, lista);
@@ -546,7 +572,7 @@ public class ClientGUI extends javax.swing.JFrame {
             jtx_lang.setText(tempObj.get("lang"));
             jtx_type.setText(tempObj.get("type"));
             jtx_located.setText(tempObj.get("located"));
-            jtxa_obs.setText(tempObj.get("obs").replaceAll("\\\\n", System.getProperty("line.separator") ));
+            jtxa_obs.setText(tempObj.get("obs").replaceAll("\\\\n", System.getProperty("line.separator")));
         }
     }
     
@@ -579,8 +605,7 @@ public class ClientGUI extends javax.swing.JFrame {
                 pushItem.put("lang",jtx_lang.getText());
                 pushItem.put("type",jtx_type.getText());
                 pushItem.put("located",jtx_located.getText());
-                pushItem.put("obs",jtxa_obs.getText());
-                
+                pushItem.put("obs",jtxa_obs.getText().replaceAll("\\n", "\\\\\\n"));
             json.add(pushItem);
             
             JSONObject newObj = new JSONObject();
@@ -595,7 +620,7 @@ public class ClientGUI extends javax.swing.JFrame {
             }
             
             try(FileWriter file = new FileWriter(path)){
-                file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n" ));
+                file.write(newObj.toJSONString().replaceAll("\\\\n", "\\n").replaceAll("\\\\r", "").replaceAll("\\r", ""));
             } catch (IOException ex) {
                 Logger.getLogger(JsonLoader.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -648,6 +673,7 @@ public class ClientGUI extends javax.swing.JFrame {
     javax.swing.JMenuItem jm_file_new;
     javax.swing.JMenu jm_help;
     javax.swing.JMenuItem jm_help_about;
+    javax.swing.JMenuItem jm_help_manual;
     javax.swing.JMenu jm_options;
     javax.swing.JMenuItem jm_options_settings;
     javax.swing.JMenuItem jm_options_vf;

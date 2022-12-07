@@ -1,2 +1,2 @@
 # Webiblioteca
-Desenvolvimento completo de um software em java com interface gráfica
+Desenvolvimento completo de um software em java com interface gráfica.
