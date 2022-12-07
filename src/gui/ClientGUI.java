@@ -367,7 +367,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jm_help_manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_help_manualActionPerformed
         try {
-            java.awt.Desktop.getDesktop().browse(new URI("www.google.com"));
+            java.awt.Desktop.getDesktop().browse(new URI("https://github.com/Treorai/Webiblioteca/blob/main/User%20Manual/Manual%20do%20Usu%C3%A1rio.md"));
         } catch (URISyntaxException | IOException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

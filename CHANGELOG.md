@@ -2,6 +2,15 @@
 
 Changes to WEBiblioteca Project will be documented in this file.
 
+## 1.0.4 | 2022-12-7
+
+### Final Release
+
+#### Changed
+
+- Finished Manual do Usuário and README files;
+- General URI adjustments;
+
 ## 1.0.3 | 2022-12-7
 
 #### Added
