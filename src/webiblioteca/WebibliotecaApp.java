@@ -10,7 +10,7 @@ public class WebibliotecaApp {
     static Configs configs = new Configs();
     
     public static void main(String[] args) {
-        String version = "1.0.4 (Build 16)";
+        String version = "1.0.5 (Build 17)";
         
         //config check
         String env = System.getenv("APPDATA");

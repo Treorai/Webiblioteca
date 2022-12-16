@@ -433,6 +433,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_title.setEditable(true);
         jtx_vol.setEditable(true);
         jtxa_obs.setEditable(true);
+        jtx_type.setEditable(true); //v.1.0.5
         
         //change button
         jb_search.setText("Salvar");
@@ -643,6 +644,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jtx_title.setEditable(false);
         jtx_vol.setEditable(false);
         jtxa_obs.setEditable(false);
+        jtx_type.setEditable(false);
     }
     
 // <editor-fold defaultstate="collapsed" desc="Vars">

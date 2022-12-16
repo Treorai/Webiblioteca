@@ -2,6 +2,12 @@
 
 Changes to WEBiblioteca Project will be documented in this file.
 
+## 1.0.5 | 2022-12-16
+
+#### Changed
+
+- User now can edit the type of the book;
+
 ## 1.0.4 | 2022-12-7
 
 ### Final Release
